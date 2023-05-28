@@ -15,12 +15,12 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="BASE_URL_1" elementType="Argument">
             <stringProp name="Argument.name">BASE_URL_1</stringProp>
-            <stringProp name="Argument.value">auth-feature-development.gandiva.ru</stringProp>
+            <stringProp name="Argument.value">${__P(BASE_URL_1,auth-feature-development.gandiva.ru)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="BASE_URL_2" elementType="Argument">
             <stringProp name="Argument.name">BASE_URL_2</stringProp>
-            <stringProp name="Argument.value">feature-development.gandiva.ru</stringProp>
+            <stringProp name="Argument.value">${__P(BASE_URL_2,feature-development.gandiva.ru)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="BASE_URL_3" elementType="Argument">
@@ -75,7 +75,7 @@
           </elementProp>
           <elementProp name="DURATION" elementType="Argument">
             <stringProp name="Argument.name">DURATION</stringProp>
-            <stringProp name="Argument.value">60</stringProp>
+            <stringProp name="Argument.value">${__P(DURATION,60)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
