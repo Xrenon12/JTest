@@ -2,8 +2,7 @@ import datetime
 import json
 
 import subprocess
-def install(name):
-    subprocess.call(['pip', 'install', "telebot"])
+subprocess.call(['pip', 'install', "telebot"])
 
 import telebot
 
