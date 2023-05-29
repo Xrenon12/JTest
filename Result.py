@@ -93,5 +93,5 @@ text = f'G1 Jmeter\n \nData: {datetime.datetime.now()} \n\n' \
         f'Link: {link}\n\n'
 for i in data['Total']:
     if(i != 'transaction'):
-        text += localization[i] + ' - ' + str(data['Total'][i]) + ' ' + str(get_change(float(data['Total'][i]), float(old_build['Total'][i]))) + '%,\n'
+        text += localization[i] + ' - ' + str(data['Total'][i]) + ' (' + str(get_change(float(data['Total'][i]), float(old_build['Total'][i]))) + '%),\n'
 bot.send_message(5107055135, text)
