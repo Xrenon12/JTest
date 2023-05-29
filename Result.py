@@ -103,13 +103,13 @@ text = f'G1 Jmeter\n \nData: {datetime.datetime.now()} \n\n' \
         f'Count users: {count_users}\n' \
         f'Rampart (sec): {rampart}\n' \
         f'Link: {link}\n\n'
-if full is False:
-    text += 'OK: ' + full + ' ' + str(full is False)
+if full == 'false':
+    text += 'OK: ' + full + ' ' + str(full == 'false')
     for i in data['Total']:
         if(i != 'transaction'):
             text += localization[i] + ' - ' + str(round(data['Total'][i], 3)) + ' (' + str(get_change(float(data['Total'][i]), float(old_build['Total'][i]))) + '%),\n'
 else:
-    text += 'NOT OK: ' + full + ' ' + str(full is False)
+    text += 'NOT OK: ' + full + ' ' + str(full == 'false')
     for i in data:
         if i != 'Total':
             text += '\nTransaction: ' + i + '\n'
