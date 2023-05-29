@@ -59,4 +59,4 @@ text += f'Start time: {start_time}\n' \
         f'Link: <a href="{link}">VK</a>\n\n'
 for i in data['Total']:
     text += localization[i] + ' - ' + str(data['Total'][i]) + ',\n'
-bot.send_message(5107055135, text, parse_mode='HTML')
+bot.send_message(5107055135, text, parse_mode='MarkdownV2')
