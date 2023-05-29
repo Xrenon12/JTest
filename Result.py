@@ -12,6 +12,18 @@ finally:
 
 # Инициализация переменных
 initiator, start_time, test_run_time, host_name, file_name, stand, count_users, rampart, link, build_number, full = sys.argv
+# initiator='jkl'
+# start_time='kl;'
+# test_run_time='kl;'
+# host_name='kl;'
+# file_name='kl;'
+# stand='kl;'
+# count_users=5
+# rampart=5
+# link='jkl'
+# build_number=112
+# full=True
+
 
 bot = telebot.TeleBot('6148942898:AAFfzdCTZNQWvFjaccxtTIrJd7T8rta1Tqo')
 data = {}
@@ -98,9 +110,13 @@ if full is False:
 else:
     for i in data:
         if i != 'Total':
+            text += '\nTransaction: ' + i + '\n'
             for j in data[i]:
-                if(j != 'transaction'):
-                    text += '\nTransaction: ' + i + '\n'
-                    text += localization[j] + ' - ' + str(round(data[i][j], 3)) + ' (' + str(get_change(float(data[i][j]), float(old_build[i][j]))) + '%),\n'
+                try:
+                    message_part = localization[j] + ' - ' + str(round(data[i][j], 3)) + ' (' + str(get_change(float(data[i][j]), float(old_build[i][j]))) + '%),\n'
+                    text += message_part
+                except:
+                    message_part = localization[j] + ' - ' + str(round(data[i][j], 3)) + '\n'
+                    text += message_part
 text += f'\n full: {full}'
 bot.send_message(5107055135, text)
