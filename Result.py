@@ -10,7 +10,7 @@ except ImportError:
 finally:
     import telebot
 
-initiator, start_time, test_run_time, host_name, file_name, stand, count_users, rampart = sys.argv
+initiator, start_time, test_run_time, host_name, file_name, stand, count_users, rampart, link = sys.argv
 bot = telebot.TeleBot('6148942898:AAFfzdCTZNQWvFjaccxtTIrJd7T8rta1Tqo')
 data = {}
 params = ['sampleCount', 'errorPct', 'medianResTime', 'maxResTime']
@@ -50,12 +50,13 @@ with open('D:\Jmeter\LastBuildResult\statistics.json', 'r') as f:
 
 text = f'G1 Jmeter\n \nData: {datetime.datetime.now()} \n\n'
 text += f'Start time: {start_time}\n' \
-        f'Test run times: {test_run_time}\n' \
+        f'Test run time (sec): {test_run_time}\n' \
         f'Host name: {host_name}\n' \
         f'file name: {file_name}\n' \
         f'Stand: {stand}\n' \
         f'Count users: {count_users}\n' \
-        f'Rampart: {rampart}\n\n'
+        f'Rampart (sec): {rampart}\n' \
+        f'Link: {link.split("//")[1]}\n\n'
 for i in data['Total']:
     text += localization[i] + ' - ' + str(data['Total'][i]) + ',\n'
 bot.send_message(5107055135, text)
