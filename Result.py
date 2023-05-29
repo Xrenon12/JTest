@@ -22,7 +22,7 @@ with open('D:\Jmeter\LastBuildResult\statistics.json', 'r') as f:
                 else:
                     data[request][key] = d[request][key]
 
-text = f'G1 Jmeter\n \nData: {datetime.datetime.now()} \n\n'
-for i in data['Total']:
-    text += i + ' - ' + str(data['Total'][i]) + ',\n'
-bot.send_message(5107055135, text)
+//text = f'G1 Jmeter\n \nData: {datetime.datetime.now()} \n\n'
+//for i in data['Total']:
+//    text += i + ' - ' + str(data['Total'][i]) + ',\n'
+//bot.send_message(5107055135, text)
