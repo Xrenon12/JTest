@@ -11,7 +11,17 @@ finally:
     import telebot
 
 # Инициализация переменных
-initiator, start_time, test_run_time, host_name, file_name, stand, count_users, rampart, link, build_number = sys.argv
+# initiator, start_time, test_run_time, host_name, file_name, stand, count_users, rampart, link, build_number = sys.argv
+initiator='test'
+start_time='2023-05-29 20:16:06 MSK'
+test_run_time=5
+host_name='rerw'
+file_name='Tests.jmx'
+stand='dev'
+count_users=5
+rampart=1
+link='TestLInk'
+build_number=100
 bot = telebot.TeleBot('6148942898:AAFfzdCTZNQWvFjaccxtTIrJd7T8rta1Tqo')
 data = {}
 old_build = {}
@@ -32,6 +42,18 @@ localization = {
     'receivedKBytesPerSec': 'Получено Kb/сек',
     'sentKBytesPerSec': 'Отправлено Kb/сек'
 }
+
+def get_change(current, previous):
+    if current == previous:
+        return str('+ 0')
+    try:
+        result = round((abs(current - previous) / previous) * 100, 2)
+        if result >= 0:
+            return str('+' + str(result))
+        else:
+            return str('-' + str(result))
+    except ZeroDivisionError:
+        return str('+ 0')
 
 # Чтение файла текущего билда
 with open('D:\Jmeter\LastBuildResult\statistics.json', 'r') as f:
@@ -79,5 +101,6 @@ text = f'G1 Jmeter\n \nData: {datetime.datetime.now()} \n\n' \
         f'Rampart (sec): {rampart}\n' \
         f'Link: {link}\n\n'
 for i in data['Total']:
-    text += localization[i] + ' - ' + str(data['Total'][i]) + str(float(data['Total'][i]) * 100 / float(old_build['Total'][i]) - 100) + '%,\n'
+    if(i != 'transaction'):
+        text += localization[i] + ' - ' + str(data['Total'][i]) + ' ' + str(get_change(float(data['Total'][i]), float(old_build['Total'][i]))) + '%,\n'
 bot.send_message(5107055135, text)
