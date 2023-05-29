@@ -3,9 +3,12 @@ import json
 
 import subprocess
 import sys
-subprocess.check_call([sys.executable, "-m", "pip", "install", 'telebot'])
-
-import telebot
+try:
+    import telebot
+except ImportError:
+    subprocess.check_call([sys.executable, "-m", "pip", "install", 'telebot'])
+finally:
+    import telebot
 
 bot = telebot.TeleBot('6148942898:AAFfzdCTZNQWvFjaccxtTIrJd7T8rta1Tqo')
 data = {}
