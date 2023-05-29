@@ -55,7 +55,7 @@ text += f'Start time: {start_time}\n' \
         f'file name: {file_name}\n' \
         f'Stand: {stand}\n' \
         f'Count users: {count_users}\n' \
-        f'Rampart: {rampart}\n'
+        f'Rampart: {rampart}\n\n'
 for i in data['Total']:
     text += localization[i] + ' - ' + str(data['Total'][i]) + ',\n'
 bot.send_message(5107055135, text)
