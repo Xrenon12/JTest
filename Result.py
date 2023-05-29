@@ -52,7 +52,7 @@ with open('D:\Jmeter\LastBuildResult\statistics.json', 'r') as f:
                     data[request][key] = d[request][key]
 
 # Чтение файла предыдущего билда
-with open(f'D:\Jmeter\DashBoard{build_number-1}\statistics.json', 'r') as f:
+with open(f'D:\Jmeter\DashBoard{str(build_number-1)}\statistics.json', 'r') as f:
     d = json.load(f)
 
     for request in d:
