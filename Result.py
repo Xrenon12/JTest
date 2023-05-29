@@ -94,12 +94,13 @@ text = f'G1 Jmeter\n \nData: {datetime.datetime.now()} \n\n' \
 if full is False:
     for i in data['Total']:
         if(i != 'transaction'):
-            text += localization[i] + ' - ' + str(data['Total'][i]) + ' (' + str(get_change(float(data['Total'][i]), float(old_build['Total'][i]))) + '%),\n'
+            text += localization[i] + ' - ' + str(round(data['Total'][i], 3)) + ' (' + str(get_change(float(data['Total'][i]), float(old_build['Total'][i]))) + '%),\n'
 else:
     for i in data:
-        if(i != 'Total'):
+        if i != 'Total':
             for j in data[i]:
                 if(j != 'transaction'):
+                    text += '\nTransaction: ' + i + '\n'
                     text += localization[j] + ' - ' + str(round(data[i][j], 3)) + ' (' + str(get_change(float(data[i][j]), float(old_build[i][j]))) + '%),\n'
 text += f'\n full: {full}'
 bot.send_message(5107055135, text)
