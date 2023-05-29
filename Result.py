@@ -2,7 +2,7 @@ import datetime
 import json
 
 import subprocess
-subprocess.call(['pip', 'install', "telebot"])
+subprocess.check_call([sys.executable, "-m", "pip", "install", 'telebot'])
 
 import telebot
 
