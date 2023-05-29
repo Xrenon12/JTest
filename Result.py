@@ -100,5 +100,6 @@ else:
         if(i != 'Total'):
             for j in data[i]:
                 if(j != 'transaction'):
-                    text += localization[j] + ' - ' + str(data[i][j]) + ' (' + str(get_change(float(data[i][j]), float(old_build[i][j]))) + '%),\n'
+                    text += localization[j] + ' - ' + str(round(data[i][j], 3)) + ' (' + str(get_change(float(data[i][j]), float(old_build[i][j]))) + '%),\n'
+text += f'\n full: {full}'
 bot.send_message(5107055135, text)
