@@ -10,7 +10,7 @@ except ImportError:
 finally:
     import telebot
 
-start_time, test_run_time, host_name, file_name, stand, count_users, rampart = argv
+start_time, test_run_time, host_name, file_name, stand, count_users, rampart = sys.argv
 bot = telebot.TeleBot('6148942898:AAFfzdCTZNQWvFjaccxtTIrJd7T8rta1Tqo')
 data = {}
 params = ['sampleCount', 'errorPct', 'medianResTime', 'maxResTime']
