@@ -10,21 +10,22 @@ except ImportError:
 finally:
     import telebot
 
+start_time, test_run_time, host_name, file_name, stand, count_users, rampart = argv
 bot = telebot.TeleBot('6148942898:AAFfzdCTZNQWvFjaccxtTIrJd7T8rta1Tqo')
 data = {}
 params = ['sampleCount', 'errorPct', 'medianResTime', 'maxResTime']
 localization = {
-    'transaction': 'Total',
+    'transaction': 'Транзакция',
     'sampleCount': 'Кол-во запросов',
     'errorCount': 'Кол-во ошибок',
     'errorPct': 'Процент ошибок',
-    'meanResTime': 'Среднее время ответа',
-    'medianResTime': 'Медиана времени ответа',
-    'minResTime': 'Минимальное время ответа',
-    'maxResTime': 'Максимальное время ответа',
-    'pct1ResTime': 'Время отклика 90%',
-    'pct2ResTime': 'Время отклика 95%',
-    'pct3ResTime': 'Время отклика 99%',
+    'meanResTime': 'Среднее время ответа (ms)',
+    'medianResTime': 'Медиана времени ответа (ms)',
+    'minResTime': 'Минимальное время ответа (ms)',
+    'maxResTime': 'Максимальное время ответа (ms)',
+    'pct1ResTime': 'Время отклика 90% (ms)',
+    'pct2ResTime': 'Время отклика 95% (ms)',
+    'pct3ResTime': 'Время отклика 99% (ms)',
     'throughput': 'Пропускная способность',
     'receivedKBytesPerSec': 'Получено Kb/сек',
     'sentKBytesPerSec': 'Отправлено Kb/сек'
@@ -48,6 +49,13 @@ with open('D:\Jmeter\LastBuildResult\statistics.json', 'r') as f:
                     data[request][key] = d[request][key]
 
 text = f'G1 Jmeter\n \nData: {datetime.datetime.now()} \n\n'
+text += f'Start time: {start_time}\n' \
+        f'Test run times: {test_run_time}\n' \
+        f'Host name: {host_name}\n' \
+        f'file name: {file_name}\n' \
+        f'Stand: {stand}\n' \
+        f'Count users: {count_users}\n' \
+        f'Rampart: {rampart}\n\n'
 for i in data['Total']:
     text += localization[i] + ' - ' + str(data['Total'][i]) + ',\n'
 bot.send_message(5107055135, text)
