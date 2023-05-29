@@ -38,7 +38,7 @@ def get_change(current, previous):
     if current == previous:
         return str('+ 0')
     try:
-        result = round((current - previous / previous) * 100, 2)
+        result = round(((current - previous) / previous) * 100, 2)
         if result >= 0:
             return str('+' + str(result))
         else:
