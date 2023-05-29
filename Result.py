@@ -79,5 +79,5 @@ text = f'G1 Jmeter\n \nData: {datetime.datetime.now()} \n\n' \
         f'Rampart (sec): {rampart}\n' \
         f'Link: {link}\n\n'
 for i in data['Total']:
-    text += localization[i] + ' - ' + str(data['Total'][i]) + str(int(data['Total'][i]) * 100 / int(old_build['Total'][i]) - 100) + '%,\n'
+    text += localization[i] + ' - ' + str(data['Total'][i]) + str(float(data['Total'][i]) * 100 / float(old_build['Total'][i]) - 100) + '%,\n'
 bot.send_message(5107055135, text)
