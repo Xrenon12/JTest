@@ -56,7 +56,7 @@ text += f'Start time: {start_time}\n' \
         f'Stand: {stand}\n' \
         f'Count users: {count_users}\n' \
         f'Rampart (sec): {rampart}\n' \
-        f'Link: habr.com\n\n'
+        f'Link: {link}\n\n'
 for i in data['Total']:
     text += localization[i] + ' - ' + str(data['Total'][i]) + ',\n'
 bot.send_message(5107055135, text)
