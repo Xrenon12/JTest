@@ -11,12 +11,12 @@ finally:
     import telebot
 
 # Инициализация переменных
-initiator, start_time, test_run_time, host_name, file_name, stand, count_users, rampart, link, build_number = sys.argv
+initiator, start_time, test_run_time, host_name, file_name, stand, count_users, rampart, link, build_number, full = sys.argv
 
 bot = telebot.TeleBot('6148942898:AAFfzdCTZNQWvFjaccxtTIrJd7T8rta1Tqo')
 data = {}
 old_build = {}
-params = ['sampleCount', 'errorPct', 'medianResTime', 'maxResTime']
+params = ['sampleCount', 'errorPct', 'medianResTime', 'maxResTime', 'pct1ResTime']
 localization = {
     'transaction': 'Транзакция',
     'sampleCount': 'Кол-во запросов',
@@ -91,7 +91,14 @@ text = f'G1 Jmeter\n \nData: {datetime.datetime.now()} \n\n' \
         f'Count users: {count_users}\n' \
         f'Rampart (sec): {rampart}\n' \
         f'Link: {link}\n\n'
-for i in data['Total']:
-    if(i != 'transaction'):
-        text += localization[i] + ' - ' + str(data['Total'][i]) + ' (' + str(get_change(float(data['Total'][i]), float(old_build['Total'][i]))) + '%),\n'
+if full is False:
+    for i in data['Total']:
+        if(i != 'transaction'):
+            text += localization[i] + ' - ' + str(data['Total'][i]) + ' (' + str(get_change(float(data['Total'][i]), float(old_build['Total'][i]))) + '%),\n'
+else:
+    for i in data:
+        if(i != 'Total'):
+            for j in data[i]:
+                if(j != 'transaction'):
+                    text += localization[j] + ' - ' + str(data[i][j]) + ' (' + str(get_change(float(data[i][j]), float(old_build[i][j]))) + '%),\n'
 bot.send_message(5107055135, text)
