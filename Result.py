@@ -11,17 +11,8 @@ finally:
     import telebot
 
 # Инициализация переменных
-# initiator, start_time, test_run_time, host_name, file_name, stand, count_users, rampart, link, build_number = sys.argv
-initiator='test'
-start_time='2023-05-29 20:16:06 MSK'
-test_run_time=5
-host_name='rerw'
-file_name='Tests.jmx'
-stand='dev'
-count_users=5
-rampart=1
-link='TestLInk'
-build_number=100
+initiator, start_time, test_run_time, host_name, file_name, stand, count_users, rampart, link, build_number = sys.argv
+
 bot = telebot.TeleBot('6148942898:AAFfzdCTZNQWvFjaccxtTIrJd7T8rta1Tqo')
 data = {}
 old_build = {}
