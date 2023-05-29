@@ -22,7 +22,7 @@ initiator, start_time, test_run_time, host_name, file_name, stand, count_users, 
 # rampart=5
 # link='jkl'
 # build_number=112
-# full=True
+# full=False
 
 
 bot = telebot.TeleBot('6148942898:AAFfzdCTZNQWvFjaccxtTIrJd7T8rta1Tqo')
@@ -104,10 +104,12 @@ text = f'G1 Jmeter\n \nData: {datetime.datetime.now()} \n\n' \
         f'Rampart (sec): {rampart}\n' \
         f'Link: {link}\n\n'
 if full is False:
+    text += 'OK: ' + full + ' ' + full is False
     for i in data['Total']:
         if(i != 'transaction'):
             text += localization[i] + ' - ' + str(round(data['Total'][i], 3)) + ' (' + str(get_change(float(data['Total'][i]), float(old_build['Total'][i]))) + '%),\n'
 else:
+    text += 'NOT OK: ' + full + ' ' + full is False
     for i in data:
         if i != 'Total':
             text += '\nTransaction: ' + i + '\n'
@@ -118,5 +120,4 @@ else:
                 except:
                     message_part = localization[j] + ' - ' + str(round(data[i][j], 3)) + '\n'
                     text += message_part
-text += f'\n full: {full}'
 bot.send_message(5107055135, text)
