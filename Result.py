@@ -13,6 +13,21 @@ finally:
 bot = telebot.TeleBot('6148942898:AAFfzdCTZNQWvFjaccxtTIrJd7T8rta1Tqo')
 data = {}
 params = ['sampleCount', 'errorPct', 'medianResTime', 'maxResTime']
+localization = {
+    'sampleCount': 'Кол-во запросов',
+    'errorCount': 'Кол-во ошибок',
+    'errorPct': 'Процент ошибок',
+    'meanResTime': 'Среднее время ответа',
+    'medianResTime': 'Медиана времени ответа',
+    'minResTime': 'Минимальное время ответа',
+    'maxResTime': 'Максимальное время ответа',
+    'pct1ResTime': 'Время отклика 90%',
+    'pct2ResTime': 'Время отклика 95%',
+    'pct3ResTime': 'Время отклика 99%',
+    'throughput': 'Пропускная способность',
+    'receivedKBytesPerSec': 'Получено Kb/сек',
+    'sentKBytesPerSec': 'Отправлено Kb/сек'
+}
 
 with open('D:\Jmeter\LastBuildResult\statistics.json', 'r') as f:
     d = json.load(f)
@@ -33,5 +48,5 @@ with open('D:\Jmeter\LastBuildResult\statistics.json', 'r') as f:
 
 text = f'G1 Jmeter\n \nData: {datetime.datetime.now()} \n\n'
 for i in data['Total']:
-    text += i + ' - ' + str(data['Total'][i]) + ',\n'
+    text += i + ' - ' + localization[str(data['Total'][i])] + ',\n'
 bot.send_message(5107055135, text)
