@@ -733,7 +733,7 @@
           <boolProp name="aggregateRows">false</boolProp>
           <boolProp name="autoScaleRows">true</boolProp>
           <stringProp name="endOffset"></stringProp>
-          <stringProp name="excludeLabels"></stringProp>
+          <stringProp name="excludeLabels">Requests</stringProp>
           <boolProp name="excludeSamplesWithRegex">false</boolProp>
           <intProp name="exportMode">0</intProp>
           <stringProp name="filePrefix">gra-</stringProp>
