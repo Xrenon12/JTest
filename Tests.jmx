@@ -738,7 +738,7 @@
           <intProp name="exportMode">0</intProp>
           <stringProp name="filePrefix">gra-</stringProp>
           <stringProp name="forceY"></stringProp>
-          <stringProp name="granulation">60000</stringProp>
+          <stringProp name="granulation">1000</stringProp>
           <intProp name="graphHeight">600</intProp>
           <intProp name="graphWidth">800</intProp>
           <stringProp name="includeLabels"></stringProp>
