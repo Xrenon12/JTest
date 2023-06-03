@@ -731,7 +731,7 @@
         <hashTree/>
         <kg.apc.jmeter.listener.GraphsGeneratorListener guiclass="TestBeanGUI" testclass="kg.apc.jmeter.listener.GraphsGeneratorListener" testname="jp@gc - Graphs Generator" enabled="true">
           <boolProp name="aggregateRows">false</boolProp>
-          <boolProp name="autoScaleRows">false</boolProp>
+          <boolProp name="autoScaleRows">true</boolProp>
           <stringProp name="endOffset"></stringProp>
           <stringProp name="excludeLabels"></stringProp>
           <boolProp name="excludeSamplesWithRegex">false</boolProp>
@@ -748,9 +748,9 @@
           <stringProp name="lowCountLimit"></stringProp>
           <stringProp name="outputBaseFolder">D:\Jmeter\gra</stringProp>
           <boolProp name="paintGradient">true</boolProp>
-          <boolProp name="paintZeroing">true</boolProp>
+          <boolProp name="paintZeroing">false</boolProp>
           <boolProp name="preventOutliers">false</boolProp>
-          <boolProp name="relativeTimes">false</boolProp>
+          <boolProp name="relativeTimes">true</boolProp>
           <stringProp name="resultsFileName">D:\Jmeter\result.csv</stringProp>
           <stringProp name="startOffset"></stringProp>
           <stringProp name="successFilter"></stringProp>
