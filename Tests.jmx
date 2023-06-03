@@ -692,7 +692,7 @@
           <intProp name="Assertion.test_type">16</intProp>
         </ResponseAssertion>
         <hashTree/>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -726,7 +726,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">result.csv</stringProp>
+          <stringProp name="filename">D:\Jmeter\result.csv</stringProp>
         </ResultCollector>
         <hashTree/>
         <kg.apc.jmeter.listener.GraphsGeneratorListener guiclass="TestBeanGUI" testclass="kg.apc.jmeter.listener.GraphsGeneratorListener" testname="jp@gc - Graphs Generator" enabled="true">
@@ -751,7 +751,7 @@
           <boolProp name="paintZeroing">true</boolProp>
           <boolProp name="preventOutliers">false</boolProp>
           <boolProp name="relativeTimes">false</boolProp>
-          <stringProp name="resultsFileName">${__P(RESULT_FILE)}</stringProp>
+          <stringProp name="resultsFileName">D:\Jmeter\result.csv</stringProp>
           <stringProp name="startOffset"></stringProp>
           <stringProp name="successFilter"></stringProp>
         </kg.apc.jmeter.listener.GraphsGeneratorListener>
