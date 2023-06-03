@@ -726,7 +726,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename">D:\result.csv</stringProp>
+          <stringProp name="filename">result.csv</stringProp>
         </ResultCollector>
         <hashTree/>
         <kg.apc.jmeter.listener.GraphsGeneratorListener guiclass="TestBeanGUI" testclass="kg.apc.jmeter.listener.GraphsGeneratorListener" testname="jp@gc - Graphs Generator" enabled="true">
