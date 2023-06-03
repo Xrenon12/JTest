@@ -118,6 +118,6 @@ else:
                 except:
                     message_part = localization[j] + ' - ' + str(round(data[i][j], 3)) + '\n'
                     text += message_part
-img = open('D:/Jmeter/gra/gra-ResponseTimesOverTime.png', 'rb')
+img = open('D:/Jmeter/gra/gra-ResponseTimesDistribution.png', 'rb')
 bot.send_photo(5107055135, img, caption=text)
 # bot.send_message(5107055135, text)
