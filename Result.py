@@ -119,6 +119,7 @@ else:
                     message_part = localization[j] + ' - ' + str(round(data[i][j], 3)) + '\n'
                     text += message_part
 img = open('D:/Jmeter/gra/gra-ResponseTimesDistribution.png', 'rb')
+print(f"Длинна текста сообщения: {len(text)}")
 if len(text) >= 4096:
     for x in range(0, len(text), 4096):
         bot.send_photo(5107055135, img, caption=text[x:x+4096])
