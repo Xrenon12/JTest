@@ -11,18 +11,18 @@ finally:
     import telebot
 
 # Инициализация переменных
-#initiator, start_time, test_run_time, host_name, file_name, stand, count_users, rampart, link, build_number, full = sys.argv
-initiator='jkl'
-start_time='kl;'
-test_run_time='kl;'
-host_name='kl;'
-file_name='kl;'
-stand='kl;'
-count_users=5
-rampart=5
-link='jkl'
-build_number=149
-full='false'
+initiator, start_time, test_run_time, host_name, file_name, stand, count_users, rampart, link, build_number, full = sys.argv
+# initiator='jkl'
+# start_time='kl;'
+# test_run_time='kl;'
+# host_name='kl;'
+# file_name='kl;'
+# stand='kl;'
+# count_users=5
+# rampart=5
+# link='jkl'
+# build_number=149
+# full='false'
 
 
 bot = telebot.TeleBot('6148942898:AAFfzdCTZNQWvFjaccxtTIrJd7T8rta1Tqo')
