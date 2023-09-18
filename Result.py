@@ -11,18 +11,18 @@ finally:
     import telebot
 
 # Инициализация переменных
-initiator, start_time, test_run_time, host_name, file_name, stand, count_users, rampart, link, build_number, full = sys.argv
-#initiator='jkl'
-#start_time='kl;'
-#test_run_time='kl;'
-#host_name='kl;'
-#file_name='kl;'
-#stand='kl;'
-#count_users=5
-#rampart=5
-#link='jkl'
-#build_number=149
-#full='true'
+#initiator, start_time, test_run_time, host_name, file_name, stand, count_users, rampart, link, build_number, full = sys.argv
+initiator='jkl'
+start_time='kl;'
+test_run_time='kl;'
+host_name='kl;'
+file_name='kl;'
+stand='kl;'
+count_users=5
+rampart=5
+link='jkl'
+build_number=149
+full='false'
 
 
 bot = telebot.TeleBot('6148942898:AAFfzdCTZNQWvFjaccxtTIrJd7T8rta1Tqo')
@@ -61,7 +61,6 @@ def get_change(current, previous):
 # Чтение файла текущего билда
 with open('D:\Jmeter\LastBuildResult\statistics.json', 'r') as f:
     d = json.load(f)
-    current_build_requests = []
 
     for request in d:
         if request != 'Requests' and request != 'Total':
@@ -73,29 +72,27 @@ with open('D:\Jmeter\LastBuildResult\statistics.json', 'r') as f:
             data[request] = {}
             for key in d[request]:
                 if isinstance(d[request][key], float):
-                    current_build_requests.append(request)
                     data[request][key] = round(d[request][key], 3)
                 else:
-                    current_build_requests.append(request)
                     data[request][key] = d[request][key]
 
 # Чтение файла предыдущего билда
-            with open(f'D:\Jmeter\DashBoard{str(int(build_number)-1)}\statistics.json', 'r') as f:
-                d = json.load(f)
+    with open(f'D:\Jmeter\DashBoard{str(int(build_number)-1)}\statistics.json', 'r') as f:
+        d = json.load(f)
 
-                for request in d:
-                    if request != 'Requests' and request != 'Total':
-                        old_build[request] = {}
-                        for key in d[request]:
-                            if key in params:
-                                old_build[request][key] = d[request][key]
-                    elif request == 'Total':
-                        old_build[request] = {}
-                        for key in d[request]:
-                            if isinstance(d[request][key], float):
-                                old_build[request][key] = round(d[request][key], 3)
-                            else:
-                                old_build[request][key] = d[request][key]
+        for request in d:
+            if request != 'Requests' and request != 'Total':
+                old_build[request] = {}
+                for key in d[request]:
+                    if key in params:
+                        old_build[request][key] = d[request][key]
+            elif request == 'Total':
+                old_build[request] = {}
+                for key in d[request]:
+                    if isinstance(d[request][key], float):
+                        old_build[request][key] = round(d[request][key], 3)
+                    else:
+                        old_build[request][key] = d[request][key]
 
 text_title = f'G1 Jmeter\n \nData: {datetime.datetime.now()} \n\n' \
         f'Start time: {start_time}\n' \
@@ -122,7 +119,7 @@ else:
                 except:
                     message_part = localization[j] + ' - ' + str(round(data[i][j], 3)) + '\n'
                     text += message_part
-img = open('D:/Jmeter/gra/gra-ResponseTimesDistribution.png', 'rb')
+img = open('D:/Jmeter/gra/gra-ResponseTimesOverTime.png', 'rb')
 
 if len(text) > 4096:
     bot.send_photo(5107055135, img, caption=text_title)
