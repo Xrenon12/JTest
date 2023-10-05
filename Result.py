@@ -40,7 +40,7 @@ localization = {
     'receivedKBytesPerSec': 'Получено Kb/сек',
     'sentKBytesPerSec': 'Отправлено Kb/сек'
 }
-report_path = 'D:\Jmeter
+report_path = 'D:\Jmeter'
 
 def get_change(current, previous):
         if current == previous:
