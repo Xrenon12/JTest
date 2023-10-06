@@ -212,12 +212,12 @@ else:
                 updates = False
             else:
                 if index != len(split_message) - 1:
-                    print(summary_line+'</pre></code>')
-                    bot.send_message(text=summary_line+'</pre></code>', chat_id=5107055135, parse_mode='HTML')
+                    print(summary_line+'</code></pre>')
+                    bot.send_message(text=summary_line+'</code></pre>', chat_id=5107055135, parse_mode='HTML')
                 else:
                     print(summary_line)
                     bot.send_message(text=summary_line, chat_id=5107055135, parse_mode='HTML')
                 summary_line = ''
                 updated = True
             if updated is True:
-                summary_line += '<pre><code>'
+                summary_line += '<code><pre>'
