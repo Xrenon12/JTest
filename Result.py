@@ -205,11 +205,9 @@ else:
     else:
         split_message = table.split('\n')
         summary_line = ''
-        updated = False
         for index, line in enumerate(split_message):
             if (len(summary_line) + len(line)) < 4000:
                 summary_line = summary_line + line + '\n'
-                updates = False
             else:
                 if index != len(split_message) - 1:
                     print(summary_line+'</code></pre>')
@@ -217,7 +215,4 @@ else:
                 else:
                     print(summary_line)
                     bot.send_message(text=summary_line, chat_id=5107055135, parse_mode='HTML')
-                summary_line = ''
-                updated = True
-            if updated is True:
-                summary_line += '<pre><code>'
+                summary_line = '<pre><code>'
