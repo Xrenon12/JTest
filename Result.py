@@ -192,4 +192,22 @@ else:
                     table_data[i][j] = str(round(data[i][j], 3))
 
 table = f'<pre><code>{imitation_table(headers=params, requests_data=table_data, last_build=have_last_build)}</code></pre>'
-bot.send_message(5107055135, table, parse_mode='HTML')
+if len(table) < 3900:
+    if len(table + text_title) >= 1024:
+        bot.send_photo(photo=f'{report_path}\gra\gra-ResponseTimesOverTime.png', chat_id=5107055135, caption=text_title)
+        bot.send_message(text=table, chat_id=5107055135, parse_mode='HTML')
+    else:
+        bot.send_photo(photo=f'{report_path}\gra\gra-ResponseTimesOverTime.png', chat_id=5107055135, caption=text_title + table)
+else:
+    bot.send_photo(photo=f'{report_path}\gra\gra-ResponseTimesOverTime.png', chat_id=5107055135, caption=text_title)
+    if len(table) < 3900:
+        bot.send_message(text=table, chat_id=5107055135, parse_mode='HTML')
+    else:
+        split_message = table.split('\n')
+        summary_line = ''
+        for line in split_message:
+            if (len(summary_line) + len(line)) < 4000:
+                summary_line = summary_line + line + '\n'
+            else:
+                bot.send_message(text=summary_line, chat_id=5107055135, parse_mode='HTML')
+                summary_line = ''
