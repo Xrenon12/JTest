@@ -1,6 +1,7 @@
 import datetime
 import json
 import os
+import glob
 
 import subprocess
 import sys
@@ -11,13 +12,23 @@ except ImportError:
 finally:
     import telebot
 
+# test_run_time = 1
+# host_name = 'R174'
+# file_name = 'G1CreateBugReport.jmx'
+# stand = 'stand'
+# count_users = 1
+# rampart = 1
+# link = 'link'
+# build_number = '165'
+# full = 'true'
+
 test_run_time = os.getenv("DURATION")
 host_name = 'R174'
 file_name = os.getenv("FileName")
 stand = os.getenv("BASE_URL_2")
 count_users = os.getenv("NUMBER_USERS")
 rampart = os.getenv("RAMPART_SEC")
-link = 'link'
+link = f'link'
 build_number = os.getenv("BUILD_NUMBER")
 full = os.getenv("FullResponse")
 
@@ -42,10 +53,53 @@ localization = {
     'sentKBytesPerSec': 'Отправлено Kb/сек'
 }
 report_path = 'D:\Jmeter'
+have_last_build = False
+
+def imitation_table(headers:list, requests_data:object, last_build=False):
+    result = ''
+    max_length_col = [0] * (len(headers) + 1)
+
+    # Определяем минимальную длинну
+    for index, request_name in enumerate(requests_data):
+        if max_length_col[0] <= len(request_name):
+            max_length_col[0] = len(request_name) + 1
+        for index, data in enumerate(requests_data[request_name]):
+            if last_build:
+                if max_length_col[index+1] <= len(data):
+                    max_length_col[index+1] = len(data) + 1
+                if max_length_col[index+1] <= len(requests_data[request_name][data]):
+                    max_length_col[index+1] = len(requests_data[request_name][data]) + 1
+            else:
+                if max_length_col[index+1] <= len(data):
+                    max_length_col[index+1] = len(data) + 1
+
+    # Headers
+    if len('Transaction ') < max_length_col[0]:
+        result += 'Transaction' + (' ' * (max_length_col[0] - len('Transaction '))) + ' '
+
+    for index, header_name in enumerate(headers):
+        if len(header_name) < max_length_col[index+1]:
+            result += header_name + (' ' * (max_length_col[index+1] - len(header_name)))
+        if index == len(headers) - 1:
+            result += '\n'
+
+    for index, request_name in enumerate(requests_data):
+        if max_length_col[0] > len(request_name):
+            result += request_name + (' ' * (max_length_col[0] - len(request_name)))
+        else:
+            result += request_name
+        for index, data_name in enumerate(requests_data[request_name]):
+            if max_length_col[index+1] > len(str(requests_data[request_name][data_name])):
+                result += str(requests_data[request_name][data_name]) + (' ' * (max_length_col[index+1] - len(str(requests_data[request_name][data_name]))))
+            else:
+                result += str(requests_data[request_name][data_name])
+        if index != len(requests_data) - 1:
+            result += '\n'
+    return result
 
 def get_change(current, previous):
     if current == previous:
-        return str('+ 0')
+        return str('+0')
     try:
         result = round(((current - previous) / previous) * 100, 2)
         if result >= 0:
@@ -53,7 +107,7 @@ def get_change(current, previous):
         else:
             return str('-' + str(result))
     except ZeroDivisionError:
-        return str('+ 0')
+        return str('+0')
 
 
 # Чтение файла текущего билда
@@ -74,8 +128,21 @@ with open(f'{report_path}\LastBuildResult\statistics.json', 'r') as f:
                 else:
                     data[request][key] = d[request][key]
 
+# Получаем последний прогон по выбранному файлу
+files = glob.glob(pathname=f'{report_path}/DashBoard*{file_name}')
+need_index = 0
+last_build = 0
+for index, name in enumerate(sorted(files)):
+    number = int(name.split(' - ')[0].split('DashBoard')[1])
+    if number > last_build and number != int(build_number):
+        last_build = number
+        need_index = index
+
+if len(files) > 1:
+    print('A file was used to compare the results: ' + files[need_index])
+    have_last_build = True
     # Чтение файла предыдущего билда
-    with open(f'{report_path}\DashBoard{str(int(build_number) - 1)}\statistics.json', 'r') as f:
+    with open(f'{files[need_index]}\statistics.json', 'r') as f:
         d = json.load(f)
 
         for request in d:
@@ -101,20 +168,28 @@ text_title = f'Gandiva Jmeter\n \nData: {datetime.datetime.now()} \n\n' \
              f'Rampart (sec): {rampart}\n\n' \
              f'<a href="{link}">Jmeter results</a>\n\n'
 text = ''
+table_data = {}
 if full == 'false':
     for i in data['Total']:
         if i != 'transaction':
-            text += localization[i] + ' - ' + str(round(data['Total'][i], 3)) + ' (' + str(get_change(float(data['Total'][i]), float(old_build['Total'][i]))) + '%),\n'
+            if len(files) > 1:
+                text += localization[i] + ' - ' + str(round(data['Total'][i], 3)) + ' (' + str(get_change(float(data['Total'][i]), float(old_build['Total'][i]))) + '%)\n'
+            else:
+                text += localization[i] + ' - ' + str(round(data['Total'][i], 3)) + '\n'
 else:
     for i in data:
         if i != 'Total':
             text += '\nTransaction: ' + i + '\n'
+            table_data[i] = {}
             for j in data[i]:
                 try:
-                    message_part = localization[j] + ' - ' + str(round(data[i][j], 3)) + ' (' + str(get_change(float(data[i][j]), float(old_build[i][j]))) + '%),\n'
+                    message_part = localization[j] + ' - ' + str(round(data[i][j], 3)) + ' (' + str(get_change(float(data[i][j]), float(old_build[i][j]))) + '%)\n'
                     text += message_part
+                    table_data[i][j] = str(round(data[i][j], 3)) + ' (' + str(get_change(float(data[i][j]), float(old_build[i][j]))) + '%)'
                 except:
                     message_part = localization[j] + ' - ' + str(round(data[i][j], 3)) + '\n'
                     text += message_part
+                    table_data[i][j] = str(round(data[i][j], 3))
 
-bot.send_message(5107055135, text)
+table = f'<pre><code>{imitation_table(headers=params, requests_data=table_data, last_build=have_last_build)}</code></pre>'
+bot.send_message(5107055135, table, parse_mode='HTML')
