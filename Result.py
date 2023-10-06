@@ -212,7 +212,10 @@ else:
                 summary_line = summary_line + line + '\n'
                 updates = False
             else:
-                self.send_message(text=table, chat_id=5107055135, parse_mode='HTML')
+                if index != len(split_message) - 1:
+                    self.send_message(text=table+'</pre></code>', chat_id=5107055135, parse_mode='HTML')
+                else:
+                    self.send_message(text=table, chat_id=5107055135, parse_mode='HTML')
                 summary_line = ''
                 updated = True
             if updated is True:
