@@ -220,4 +220,4 @@ else:
                 summary_line = ''
                 updated = True
             if updated is True:
-                summary_line += '<code><pre>'
+                summary_line += '<pre><code>'
