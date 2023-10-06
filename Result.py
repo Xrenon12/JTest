@@ -12,25 +12,25 @@ except ImportError:
 finally:
     import telebot
 
-# test_run_time = 1
-# host_name = 'R174'
-# file_name = 'G1CreateBugReport.jmx'
-# stand = 'stand'
-# count_users = 1
-# rampart = 1
-# link = 'link'
-# build_number = '165'
-# full = 'true'
-
-test_run_time = os.getenv("DURATION")
+test_run_time = 1
 host_name = 'R174'
-file_name = os.getenv("FileName")
-stand = os.getenv("BASE_URL_2")
-count_users = os.getenv("NUMBER_USERS")
-rampart = os.getenv("RAMPART_SEC")
-link = f'link'
-build_number = os.getenv("BUILD_NUMBER")
-full = os.getenv("FullResponse")
+file_name = 'G1OpenPages.jmx'
+stand = 'stand'
+count_users = 1
+rampart = 1
+link = 'link'
+build_number = '175'
+full = 'true'
+
+# test_run_time = os.getenv("DURATION")
+# host_name = 'R174'
+# file_name = os.getenv("FileName")
+# stand = os.getenv("BASE_URL_2")
+# count_users = os.getenv("NUMBER_USERS")
+# rampart = os.getenv("RAMPART_SEC")
+# link = f'link'
+# build_number = os.getenv("BUILD_NUMBER")
+# full = os.getenv("FullResponse")
 
 bot = telebot.TeleBot('6148942898:AAFfzdCTZNQWvFjaccxtTIrJd7T8rta1Tqo')
 data = {}
@@ -200,7 +200,6 @@ if len(table) < 3900:
         bot.send_message(text=text_title + table, chat_id=5107055135, parse_mode='HTML')
 else:
     bot.send_message(text=text_title, chat_id=5107055135, parse_mode='HTML')
-
     if len(table) < 3900:
         bot.send_message(text=table, chat_id=5107055135, parse_mode='HTML')
     else:
@@ -214,10 +213,10 @@ else:
             else:
                 if index != len(split_message) - 1:
                     print(summary_line+'</pre></code>')
-                    self.send_message(text=summary_line+'</pre></code>', chat_id=5107055135, parse_mode='HTML')
+                    bot.send_message(text=summary_line+'</pre></code>', chat_id=5107055135, parse_mode='HTML')
                 else:
                     print(summary_line)
-                    self.send_message(text=summary_line, chat_id=5107055135, parse_mode='HTML')
+                    bot.send_message(text=summary_line, chat_id=5107055135, parse_mode='HTML')
                 summary_line = ''
                 updated = True
             if updated is True:
