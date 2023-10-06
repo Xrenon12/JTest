@@ -194,12 +194,15 @@ else:
 table = f'<pre><code>{imitation_table(headers=params, requests_data=table_data, last_build=have_last_build)}</code></pre>'
 if len(table) < 3900:
     if len(table + text_title) >= 1024:
-        bot.send_photo(photo=f'{report_path}\gra\gra-ResponseTimesOverTime.png', chat_id=5107055135, caption=text_title)
+        # bot.send_photo(photo=f'{report_path}\gra\gra-ResponseTimesOverTime.png', chat_id=5107055135, caption=text_title)
+        bot.send_message(text=text_title, chat_id=5107055135, parse_mode='HTML')
         bot.send_message(text=table, chat_id=5107055135, parse_mode='HTML')
     else:
-        bot.send_photo(photo=f'{report_path}\gra\gra-ResponseTimesOverTime.png', chat_id=5107055135, caption=text_title + table)
+        # bot.send_photo(photo=f'{report_path}\gra\gra-ResponseTimesOverTime.png', chat_id=5107055135, caption=text_title + table)
+        bot.send_message(text=text_title + table, chat_id=5107055135, parse_mode='HTML')
 else:
-    bot.send_photo(photo=f'{report_path}\gra\gra-ResponseTimesOverTime.png', chat_id=5107055135, caption=text_title)
+    # bot.send_photo(photo=f'{report_path}\gra\gra-ResponseTimesOverTime.png', chat_id=5107055135, caption=text_title)
+    bot.send_message(text=text_title, chat_id=5107055135, parse_mode='HTML')
     if len(table) < 3900:
         bot.send_message(text=table, chat_id=5107055135, parse_mode='HTML')
     else:
